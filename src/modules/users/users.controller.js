@@ -1,7 +1,7 @@
 import { users } from "../../mock-db/users.js";
 import { User } from "./users.model.js";
 
-// route handler: GET a single user by id from the database
+// ✅ route handler: GET a single user by id from the database
 export const getUser2 = async (req, res) => {
   const {id} = req.params;
 
@@ -61,13 +61,13 @@ export const testAPI = (req, res) => {
 );
 }
 
-// route handler: get all users (mock)
+// ❌ route handler: get all users (mock)
 export const getUsers1 = (req, res) => {
     res.status(200).json(users);
     // console.log(res);
 };
 
-// route handler: get all users from the database
+// ✅ route handler: get all users from the database
 export const getUsers2 = async (req, res) => {
   try {
     const users = await User.find().select("-password");
@@ -84,7 +84,7 @@ export const getUsers2 = async (req, res) => {
   }
 };
 
-// route handler: delete a new user (mock)
+// ❌ route handler: delete a new user (mock)
 export const deleteUser1 = (req, res) => {
   const userId = req.params.id;
 
@@ -99,7 +99,7 @@ export const deleteUser1 = (req, res) => {
   }
 };
 
-// route handler: delete a new user in the database
+// ✅ route handler: delete a new user in the database
 export const deleteUser2 = async (req, res) => {
   const {id} = req.params;
 
@@ -125,7 +125,7 @@ export const deleteUser2 = async (req, res) => {
   };
 };
 
-// route handler: create a new user (mock)
+// ❌ route handler: create a new user (mock)
 export const createUser1 = (req, res) => {
     const {name, email} = req.body;
 
@@ -140,7 +140,7 @@ export const createUser1 = (req, res) => {
     res.status(201).json(newUser);
 };
 
-// route handler: create a new user in the database
+// ✅ route handler: create a new user in the database
 export const createUser2 = async (req, res) => {
   const {username, email, password, role} = req.body;
 
@@ -177,7 +177,7 @@ export const createUser2 = async (req, res) => {
   }
 };
 
-// route handler: update a user in the database
+// ✅ route handler: update a user in the database
 export const updateUser2 = async (req, res) => {
   const {id} = req.params;
 

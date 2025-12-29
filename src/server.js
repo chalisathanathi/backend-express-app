@@ -15,5 +15,5 @@ try {
     });
 } catch (error) {
     console.error("Startup failed (ﾟДﾟ*)ﾉ", error);
-        process.exit(1)
+    process.exit(1) //มีไว้ให้มันหยุดรันเวลา error หรือปิดโปรแกรม
 };

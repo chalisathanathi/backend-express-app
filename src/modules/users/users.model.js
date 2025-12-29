@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // a data model is created from a data schema
-
+// Schema = ออกแบบโครงสร้างข้อมูล ว่า user 1 คนต้องมีอะไรบ้าง
 const userSchema = new mongoose.Schema(
     {
     username: {
