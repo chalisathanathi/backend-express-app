@@ -1,4 +1,5 @@
 import {app} from "./app.js";
+import { connectDB } from "./config/mongodb.js";
 
 const PORT = 3000;
 
@@ -7,6 +8,12 @@ const PORT = 3000;
 //   res.send("Hallo! I'm server aka your father!");
 // });
 
-app.listen(PORT, () => {
-    console.log(`Your father is running on port ${PORT}!`);
-});
+try {
+    await connectDB()
+    app.listen(PORT, () => {
+    console.log(`Your father is running on port ${PORT} \(@^0^@)/!`);
+    });
+} catch (error) {
+    console.error("Startup failed (ﾟДﾟ*)ﾉ", error);
+        process.exit(1)
+};
