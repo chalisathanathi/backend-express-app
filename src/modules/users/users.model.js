@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 // a data model is created from a data schema
 // Schema = ออกแบบโครงสร้างข้อมูล ว่า user 1 คนต้องมีอะไรบ้าง
@@ -30,6 +31,12 @@ const userSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
+
+//Hash password before saving
+userSchema.pre("save", async function(){
+    if(!this.isModified("password")) return;
+    this.password = await bcrypt.hash(this.password, 10)
+});
 
 // mongodb will automatically create users collection
 
