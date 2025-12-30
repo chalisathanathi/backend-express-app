@@ -18,6 +18,10 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("Hello World ╰(*°▽°*)╯");
+});
+
 app.use("/api", apiRoutes);
 //ถ้าหน้าไม่เยอะ apiRoutes สามารถถูกแทนที่ด้วยฟังก์ชั่นโดยตรงได้เลย
 
