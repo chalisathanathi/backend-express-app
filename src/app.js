@@ -1,8 +1,16 @@
 import express from "express";
 import cors from "cors";
 import {router as apiRoutes} from "./routes/index.js";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import { limiter } from "./middlewares/rateLimiter.js";
 
 export const app = express();
+
+app.set("trust proxy", 1);
+
+// Global middleware: 1 big middleware with various tiny ones in it
+app.use(helmet());
 
 // ระบุว่า frontend ไหนบ้างที่เชื่อมกับ backend อันนี้ได้
 const corsOptions = {
@@ -12,11 +20,17 @@ const corsOptions = {
         "http://localhost:5175",
         "https://frontend-react-app-mu.vercel.app",
     ],
+    credentials: true, // allow cookies to be sent
 };
 
 app.use(cors(corsOptions));
 
+app.use(limiter);
+
 app.use(express.json());
+
+// Middleware to parse cookies (required for cookie-based auth)
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
     res.send("Hello World ╰(*°▽°*)╯");
