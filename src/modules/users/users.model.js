@@ -26,6 +26,37 @@ const userSchema = new mongoose.Schema(
         minlength: 6,
         select: false
     },
+    embedding: {
+        status: {
+            type: String,
+            enum: ["PENDING", "PROCESSING", "READY", "FAILED"],
+            default: "PENDING",
+        },
+        dims: {
+            type: Number,
+            default: 3072,
+        },
+        vector: {
+            type: [Number],
+            select: false,
+        },
+        attempts: {
+            type: Number,
+            default: 0,
+        },
+        lastAttemptAt: {
+            type: Date,
+            default: null,
+        },
+        updatedAt: {
+            type: Date,
+            default: null,
+        },
+        lastError: {
+            type: String,
+            default: null,
+        },
+    },
     },
     {
         timestamps: true,
